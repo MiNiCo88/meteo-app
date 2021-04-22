@@ -1,0 +1,48 @@
+<div class="drawer bg-bgLight"
+     [ngClass]="{'drawer--open overflow-y-auto' : isOpen}"
+     (click)="isOpen = !isOpen">
+  <div class="flex flex-col mt-10 ml-16">
+    <p class="text-2xl mt-3 mb-2 text-secondary">Previsioni</p>
+    <div class="flex flex-row flex-wrap pb-10">
+      <div *ngFor="let weather of forecast"
+           class="flex w-1/2 sm:w-1/4 flex-shrink-0 flex-row text-secondary items-center mt-10">
+        <i [ngClass]="'owi owi-' + weather.icon"
+           class="text-icon-small"></i>
+        <div class="flex flex-col pl-2"><p class="text-sm mt-3 text-secondary">
+          {{ weather.dt | date: 'd/M'}} Alle {{ weather.dt | date: 'hh:mm' }}</p>
+          <p class="text-sm text-secondary capitalize">{{ weather.condition }}</p></div>
+      </div>
+    </div>
+  </div>
+  <svg *ngIf="isOpen; else open"
+       stroke="currentColor"
+       fill="none"
+       stroke-width="2"
+       viewBox="0 0 24 24"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       class="drawer__icon text-secondary"
+       height="1em"
+       width="1em"
+       xmlns="http://www.w3.org/2000/svg">
+    <line x1="19" y1="12" x2="5" y2="12"></line>
+    <polyline points="12 19 5 12 12 5"></polyline>
+  </svg>
+  <ng-template #open>
+    <svg
+      stroke="currentColor"
+      fill="none"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="drawer__icon text-secondary transform rotate-90"
+      height="1em"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </ng-template>
+</div>
